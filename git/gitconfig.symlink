@@ -8,9 +8,8 @@
 [user]
         name = Zach Holman
         email = zach@zachholman.com
-        helper = /opt/boxen/bin/boxen-git-credential
         # FIXME: You'll want the `helper` line below; delete the one above.
-        # helper = osxkeychain
+        helper = osxkeychain
 [alias]
         co = checkout
         promote = !$ZSH/bin/git-promote
@@ -37,5 +36,5 @@
         autocorrect = 1
 
 # FIXME: You can nuke all of this on your machine.
-[credential]
-        helper = /opt/boxen/bin/boxen-git-credential
+[push]
+	default = simple
