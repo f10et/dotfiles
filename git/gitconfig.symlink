@@ -6,13 +6,15 @@
 [hub]
         protocol = https
 [user]
-        name = Zach Holman
-        email = zach@zachholman.com
-        helper = /opt/boxen/bin/boxen-git-credential
+        name = Florian Zysset
+        email = admin@scboffspring.eu
+        
         # FIXME: You'll want the `helper` line below; delete the one above.
-        # helper = osxkeychain
+        helper = osxkeychain
 [alias]
         co = checkout
+	st = status
+	br = branch
         promote = !$ZSH/bin/git-promote
         wtf     = !$ZSH/bin/git-wtf
         rank-contributers = !$ZSH/bin/git-rank-contributers
@@ -23,10 +25,10 @@
         branch = auto
         ui = true
 [core]
-        excludesfile = /opt/boxen/config/git/gitignore
+        #excludesfile = /opt/boxen/config/git/gitignore
         # FIXME: You'll want the `excludesfile` line below; delete the one above.
-        # excludesfile = ~/.gitignore
-        editor = vim
+        excludesfile = ~/.gitignore
+        editor = nano
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -37,5 +39,3 @@
         autocorrect = 1
 
 # FIXME: You can nuke all of this on your machine.
-[credential]
-        helper = /opt/boxen/bin/boxen-git-credential
