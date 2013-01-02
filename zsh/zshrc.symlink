@@ -51,9 +51,9 @@ then
   source ~/.localrc
 fi
 
-
+export EDITOR=subl
 # load every completion after autocomplete loads
 for config_file ($DOTFILES/**/completion.zsh) source $config_file
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin:$DOTFILES/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
