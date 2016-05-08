@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh configuration.
+export PATH=/usr/local/bin:/usr/bin:$PATH
 ZSH=$HOME/.dotfiles
 
 # Set name of the theme to load.
