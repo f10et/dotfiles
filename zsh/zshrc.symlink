@@ -52,6 +52,7 @@ then
   source ~/.localrc
 fi
 
+unsetopt AUTO_CD
 export EDITOR=subl
 # load every completion after autocomplete loads
 for config_file ($DOTFILES/**/completion.zsh) source $config_file
