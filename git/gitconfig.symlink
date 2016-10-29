@@ -40,3 +40,5 @@
 # FIXME: You can nuke all of this on your machine.
 [credential]
 	helper = store
+[push]
+	default = simple
