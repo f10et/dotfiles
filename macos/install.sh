@@ -10,3 +10,21 @@ fi
 
 echo "› sudo softwareupdate -i -a"
 sudo softwareupdate -i -a
+
+brew cask install visual-studio-code \
+  adobe-creative-cloud \
+  1password \
+  1password-cli \
+  calibre \
+  google-chrome \
+  google-drive-file-stream \
+  intellij-idea \
+  iterm2 \
+  handbrake \
+  microsoft-office \
+  shifit \
+  spotify \
+  steam \
+  slack \
+  vlc \
+  
