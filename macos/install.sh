@@ -17,7 +17,6 @@ brew cask install visual-studio-code \
   1password-cli \
   calibre \
   google-chrome \
-  google-drive-file-stream \
   intellij-idea \
   iterm2 \
   handbrake \
