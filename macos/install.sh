@@ -11,6 +11,8 @@ fi
 echo "› sudo softwareupdate -i -a"
 sudo softwareupdate -i -a
 
+brew install tldr htop hub
+
 brew cask install visual-studio-code \
   adobe-creative-cloud \
   1password \
