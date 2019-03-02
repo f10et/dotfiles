@@ -27,4 +27,5 @@ brew cask install visual-studio-code \
   spotify \
   steam \
   slack \
+  fantastical \
   vlc 
