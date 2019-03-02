@@ -17,6 +17,7 @@ brew cask install visual-studio-code \
   adobe-creative-cloud \
   1password \
   1password-cli \
+  postman \
   calibre \
   google-chrome \
   intellij-idea \
