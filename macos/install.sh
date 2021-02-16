@@ -17,16 +17,19 @@ brew cask install visual-studio-code \
   adobe-creative-cloud \
   1password \
   1password-cli \
-  postman \
   calibre \
+  goland \
+  firefox \
   google-chrome \
+  google-cloud-sdk \
   intellij-idea \
   iterm2 \
   handbrake \
-  microsoft-office \
-  shifit \
+  openvpn-connect \
+  shiftit \
+  notion \
   spotify \
-  steam \
   slack \
   fantastical \
+  microsoft-office \
   vlc 

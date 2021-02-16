@@ -36,4 +36,12 @@
 [commit]
 	gpgSign = true
 [user]
-	signingkey = 556CCB3DD11D0B50FB25D92679EB781EFD033AA1
+	signingkey = E30D86CC1A4C92AA60B48E15C7E027A3FE51141D
+[pull]
+	rebase = true
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+[url "ssh://git@gitlab.com/"]
+        insteadOf = https://gitlab.com/
+[url "ssh://git@bitbucket.org/"]
+  insteadOf = https://bitbucket.org/

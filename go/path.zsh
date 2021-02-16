@@ -1,2 +1,2 @@
-export GOPATH="/Users/florianzysset/code"
+export GOPATH="/Users/scboffspring"
 export PATH="$GOPATH/bin:$PATH"
