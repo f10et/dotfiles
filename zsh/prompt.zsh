@@ -66,7 +66,7 @@ battery_status() {
     $ZSH/bin/battery-status
   fi
 }
-
+export KUBE_PS1_SYMBOL_ENABLE=false 
 # export PROMPT=$'\n$(battery_status)in $(directory_name) $(git_dirty)$(need_push)\n> '
 export PROMPT=$'\n$(battery_status) $(kube_ps1) $(directory_name)$(git_dirty)$(need_push)\n> '
 set_prompt () {
