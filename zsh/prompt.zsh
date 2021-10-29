@@ -8,6 +8,7 @@ then
 else
   git="/usr/bin/git"
 fi
+source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 
 git_branch() {
   echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
@@ -67,7 +68,7 @@ battery_status() {
 }
 
 # export PROMPT=$'\n$(battery_status)in $(directory_name) $(git_dirty)$(need_push)\n> '
-export PROMPT=$'\n$(directory_name) $(git_dirty)$(need_push)\n> '
+export PROMPT=$'\n$(battery_status) $(kube_ps1) $(directory_name)$(git_dirty)$(need_push)\n> '
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }

@@ -34,13 +34,13 @@
 #[credential]
 #	helper = osxkeychain
 [commit]
-	gpgSign = true
+	gpgsign = true
 [user]
-	signingkey = E30D86CC1A4C92AA60B48E15C7E027A3FE51141D
+	signingkey = 2EFCD0413D2625B0BE9DD37CC46CBC60CFD74323
 [pull]
 	rebase = true
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+#[url "ssh://git@github.com/"]
+#  insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
         insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]

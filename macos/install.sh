@@ -9,18 +9,17 @@ fi
 # yeah, let's do that.
 
 echo "› sudo softwareupdate -i -a"
-sudo softwareupdate -i -a
+#sudo softwareupdate -i -a
 
-brew install tldr htop hub
+brew install tldr htop hub kubectx
 
-brew cask install visual-studio-code \
-  adobe-creative-cloud \
-  1password \
+brew install --cask visual-studio-code \
   1password-cli \
+  1password \
   calibre \
   goland \
   firefox \
-  google-chrome \
+  microsoft-edge \
   google-cloud-sdk \
   intellij-idea \
   iterm2 \
@@ -32,4 +31,5 @@ brew cask install visual-studio-code \
   slack \
   fantastical \
   microsoft-office \
-  vlc 
+  vlc \
+  zoom
