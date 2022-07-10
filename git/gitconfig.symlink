@@ -17,6 +17,8 @@
 [core]
         excludesfile = ~/.gitignore
         editor = nano
+	compression = 0
+	packedGitWindowSize = 512m 
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -39,11 +41,16 @@
 	signingkey = 2EFCD0413D2625B0BE9DD37CC46CBC60CFD74323
 [pull]
 	rebase = true
-#[url "ssh://git@github.com/"]
-#  insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
         insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
 [merge]
 	renameLimit = 999999
+[pack] 
+	deltaCacheSize = 2047m 
+	packSizeLimit = 2047m 
+	windowMemory = 2047m
+

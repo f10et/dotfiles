@@ -16,20 +16,15 @@ brew install tldr htop hub kubectx kube-ps1 krew
 brew install --cask visual-studio-code \
   1password-cli \
   1password \
-  calibre \
-  goland \
   firefox \
   microsoft-edge \
   google-cloud-sdk \
-  intellij-idea \
+  jetbrains-toolbox \
   iterm2 \
   handbrake \
-  openvpn-connect \
   shiftit \
   notion \
   spotify \
   slack \
-  fantastical \
-  microsoft-office \
   vlc \
   zoom
