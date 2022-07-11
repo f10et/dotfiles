@@ -22,7 +22,7 @@ brew install --cask visual-studio-code \
   jetbrains-toolbox \
   iterm2 \
   handbrake \
-  shiftit \
+  rectangle \
   notion \
   spotify \
   slack \
