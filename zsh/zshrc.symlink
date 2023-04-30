@@ -100,9 +100,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
- export CLOUDSDK_PYTHON="$(brew --prefix)/opt/python@3.8/libexec/bin/python"
-     source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-     source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+export CLOUDSDK_PYTHON="$(brew --prefix)/opt/python@3.8/libexec/bin/python"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
@@ -148,15 +148,10 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 
 export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-export PATH=$PATH:/usr/local/bin:/Users/scboffspring/.gem/ruby/2.6.0/bin
-
+# export PATH=$PATH:/usr/local/bin:/Users/f10et/.gem/ruby/2.6.0/bin
 
 gpg-agent --daemon &> /dev/null
-export RMVIEW_CONF=$HOME/.dotfiles/rmview/rmview.json
-
-export PATH="${PATH}:${HOME}/.krew/bin"
 
 ulimit -f unlimited
 ulimit -c unlimited
 ulimit -n unlimited
-ulimit -u 100000

@@ -9,4 +9,9 @@ cd ~/src/github.com/f10et
 
 git clone https://github.com/f10et/dotfiles.git
 cd ~
-ln -s ~/src/github.com/f10et/dotfiles .dotfiles
+ln -s ~/src/github.com/f10et/dotfiles ~/.dotfiles
+
+cd  ~/src/github.com/f10et/dotfiles
+
+script/bootstrap
+script/install

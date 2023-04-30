@@ -20,6 +20,7 @@ brew install --cask visual-studio-code \
   google-cloud-sdk \
   jetbrains-toolbox \
   iterm2 \
+  obsidian \
   handbrake \
   rectangle \
   notion \
@@ -27,6 +28,14 @@ brew install --cask visual-studio-code \
   slack \
   krisp \
   linear-linear \
+  cron \
+  raycast \
+  viscosity \
+  grammarly \
+  superhuman \
+  loom \
+  figma \
+  whatsapp \
   sonos \
   vlc \
   zoom
