@@ -14,10 +14,9 @@ echo "› sudo softwareupdate -i -a"
 brew install tldr htop hub kubectx kube-ps1 krew
 
 brew install --cask visual-studio-code \
-  1password-cli \
   1password \
   firefox \
-  microsoft-edge \
+  arc \
   google-cloud-sdk \
   jetbrains-toolbox \
   iterm2 \
@@ -26,5 +25,8 @@ brew install --cask visual-studio-code \
   notion \
   spotify \
   slack \
+  krisp \
+  linear-linear \
+  sonos \
   vlc \
   zoom
