@@ -8,7 +8,7 @@ then
 else
   git="/usr/bin/git"
 fi
-source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+source "$HOMEBREW_PATH/kube-ps1/share/kube-ps1.sh"
 
 git_branch() {
   echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
