@@ -26,6 +26,7 @@ brew install --cask visual-studio-code \
   notion \
   spotify \
   slack \
+  orbstack \
   krisp \
   linear-linear \
   cron \

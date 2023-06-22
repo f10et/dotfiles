@@ -1,1 +1,1 @@
-brew install node@16 yarn
+brew install node@18 yarn
