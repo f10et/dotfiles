@@ -157,3 +157,4 @@ gpg-agent --daemon &> /dev/null
 ulimit -f unlimited
 ulimit -c unlimited
 ulimit -n unlimited
+export PATH=$PATH:$HOME/.maestro/bin
