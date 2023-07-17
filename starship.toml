@@ -5,9 +5,9 @@ format = '$status$battery$directory$kubernetes $git_branch$git_state$git_status(
 truncate_to_repo = false
 
 [status]
-symbol = '🔴 ERROR: $status '
-success_symbol = '🟢 '
-format = '[$symbol]($style)'
+symbol = '🔴 ERROR: $status'
+success_symbol = '🟢'
+format = '[$symbol]($style) '
 map_symbol = true
 disabled = false
 
