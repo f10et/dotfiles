@@ -1,11 +1,15 @@
-format = '$status$battery$directory$kubernetes $git_branch$git_state$git_status($git_metrics)$character '
+format = '$battery$directory$kubernetes $git_branch$git_state$git_status($git_metrics)$character '
 
 
 [directory]
 truncate_to_repo = false
 
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[X](bold red)'
+
 [status]
-symbol = '🔴 ERROR: $status'
+symbol = '🔴'
 success_symbol = '🟢'
 format = '[$symbol]($style) '
 map_symbol = true
