@@ -41,8 +41,8 @@
 #	signingkey = 2EFCD0413D2625B0BE9DD37CC46CBC60CFD74323
 [pull]
 	rebase = true
-#[url "ssh://git@github.com/"]
-#  insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
         insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
