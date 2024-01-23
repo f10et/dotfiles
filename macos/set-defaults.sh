@@ -41,3 +41,10 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
 launchctl limit maxfiles 100000 unlimited
+defaults write -g NSRequiresAquaSystemAppearance -bool Yes
+
+
+
+
+
+
