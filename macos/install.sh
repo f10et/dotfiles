@@ -15,7 +15,6 @@ brew install tldr htop hub kubectx kube-ps1 krew starship
 
 brew install --cask visual-studio-code \
   1password \
-  firefox \
   arc \
   google-cloud-sdk \
   jetbrains-toolbox \
@@ -24,19 +23,13 @@ brew install --cask visual-studio-code \
   handbrake \
   rectangle \
   notion \
-  spotify \
   slack \
   orbstack \
   krisp \
   linear-linear \
-  cron \
   raycast \
-  viscosity \
-  grammarly \
   superhuman \
-  loom \
   figma \
-  whatsapp \
   sonos \
   vlc \
   zoom

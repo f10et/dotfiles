@@ -1,6 +1,9 @@
 # Stolen from
 #   https://github.com/sstephenson/rbenv/blob/master/completions/rbenv.zsh
 
+. "$HOME/.asdf/completions/asdf.bash"
+. "$HOME/.asdf/asdf.sh"
+
 if [[ ! -o interactive ]]; then
     return
 fi
@@ -20,3 +23,4 @@ _rbenv() {
 
   reply=("${(ps:\n:)completions}")
 }
+

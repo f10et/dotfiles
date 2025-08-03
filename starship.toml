@@ -34,7 +34,7 @@ added_style = 'bold blue'
 format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
 disabled = false
 ignore_submodules = false
-include_staged = true
+#include_staged = true
 
 [git_status]
 format = ' -> $ahead_behind$staged$deleted$untracked'
