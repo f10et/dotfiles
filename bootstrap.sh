@@ -3,7 +3,7 @@
 sudo xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install --cask gpg-suite-no-mail
-
+softwareupdate --install-rosetta --agree-to-license
 mkdir -p ~/src/github.com/f10et
 cd ~/src/github.com/f10et 
 
