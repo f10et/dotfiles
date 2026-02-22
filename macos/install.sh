@@ -13,12 +13,11 @@ echo "› sudo softwareupdate -i -a"
 
 brew install tldr htop hub kubectx kube-ps1 krew starship
 
-brew install --cask visual-studio-code \
-  1password \
+brew install --cask 1password \
   arc \
+  cursor \
   google-cloud-sdk \
   jetbrains-toolbox \
-  iterm2 \
   obsidian \
   handbrake \
   rectangle \
@@ -31,5 +30,4 @@ brew install --cask visual-studio-code \
   superhuman \
   figma \
   sonos \
-  vlc \
-  zoom
+  vlc
