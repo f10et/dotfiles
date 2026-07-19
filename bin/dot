@@ -35,7 +35,12 @@ displayUsageAndExit() {
 }
 
 save_modules() {
-	mapfile -t modules < <(dotfiles_resolve_modules "$@")
+	local module
+	local modules=()
+
+	while IFS= read -r module; do
+		[ -n "$module" ] && modules+=("$module")
+	done < <(dotfiles_resolve_modules "$@")
 	dotfiles_write_enabled "${modules[@]}"
 }
 
@@ -44,9 +49,15 @@ add_modules() {
 	local current=()
 	local requested=()
 
-	mapfile -t current < <(dotfiles_enabled_modules)
-	mapfile -t requested < <(dotfiles_resolve_modules "$@")
-	mapfile -t modules < <(printf '%s\n' "${current[@]}" "${requested[@]}" | dotfiles_unique_modules)
+	while IFS= read -r module; do
+		[ -n "$module" ] && current+=("$module")
+	done < <(dotfiles_enabled_modules)
+	while IFS= read -r module; do
+		[ -n "$module" ] && requested+=("$module")
+	done < <(dotfiles_resolve_modules "$@")
+	while IFS= read -r module; do
+		[ -n "$module" ] && modules+=("$module")
+	done < <(printf '%s\n' "${current[@]}" "${requested[@]}" | dotfiles_unique_modules)
 	dotfiles_write_enabled "${modules[@]}"
 }
 
@@ -56,8 +67,12 @@ remove_modules() {
 	local requested=()
 	local next=()
 
-	mapfile -t current < <(dotfiles_enabled_modules)
-	mapfile -t requested < <(dotfiles_resolve_modules "$@")
+	while IFS= read -r module; do
+		[ -n "$module" ] && current+=("$module")
+	done < <(dotfiles_enabled_modules)
+	while IFS= read -r module; do
+		[ -n "$module" ] && requested+=("$module")
+	done < <(dotfiles_resolve_modules "$@")
 
 	for module in "${current[@]}"; do
 		remove=false
@@ -76,8 +91,11 @@ remove_modules() {
 
 run_update() {
 	export ZSH="${ZSH:-$HOME/.dotfiles}"
+	local module
 	local enabled=()
-	mapfile -t enabled < <(dotfiles_enabled_modules)
+	while IFS= read -r module; do
+		[ -n "$module" ] && enabled+=("$module")
+	done < <(dotfiles_enabled_modules)
 
 	if dotfiles_contains_module macos "${enabled[@]}"; then
 		"$ZSH/macos/set-defaults.sh"

@@ -8,7 +8,10 @@ cd "$(dirname "$0")/.."
 
 source script/lib/modules.sh
 
-mapfile -t modules < <(dotfiles_resolve_modules "$@")
+modules=()
+while IFS= read -r module; do
+  [ -n "$module" ] && modules+=("$module")
+done < <(dotfiles_resolve_modules "$@")
 
 for module in "${modules[@]}"; do
   installer="$DOTFILES_ROOT/$module/install.sh"

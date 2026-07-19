@@ -147,7 +147,10 @@ install_dotfiles () {
   done
 }
 
-mapfile -t modules < <(dotfiles_resolve_modules "$@")
+modules=()
+while IFS= read -r module; do
+  [ -n "$module" ] && modules+=("$module")
+done < <(dotfiles_resolve_modules "$@")
 dotfiles_write_enabled "${modules[@]}"
 
 if dotfiles_contains_module git "${modules[@]}"; then
