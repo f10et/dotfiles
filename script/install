@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 #
-# Run all dotfiles installers.
+# Run installers for enabled or requested dotfiles modules.
 
-set -e
+set -euo pipefail
 
-cd "$(dirname $0)"/..
+cd "$(dirname "$0")/.."
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+source script/lib/modules.sh
+
+mapfile -t modules < <(dotfiles_resolve_modules "$@")
+
+for module in "${modules[@]}"; do
+  installer="$DOTFILES_ROOT/$module/install.sh"
+
+  if [ -f "$installer" ]; then
+    echo "› install $module"
+    (cd "$DOTFILES_ROOT" && sh "$installer")
+  fi
+done

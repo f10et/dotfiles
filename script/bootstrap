@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 #
-# bootstrap installs things.
+# bootstrap installs dotfile symlinks for enabled or requested modules.
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
-set -e
+set -euo pipefail
+
+source script/lib/modules.sh
 
 echo ''
 
@@ -30,6 +32,11 @@ fail () {
 setup_gitconfig () {
   if ! [ -f git/gitconfig.local.symlink ]
   then
+    if ! [ -t 0 ]; then
+      info 'skipping gitconfig local setup (non-interactive)'
+      return
+    fi
+
     info 'setup gitconfig'
 
     git_credential='cache'
@@ -129,15 +136,24 @@ install_dotfiles () {
   info 'installing dotfiles'
 
   local overwrite_all=true backup_all=false skip_all=false
+  local module src dst
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
+  for module in "${modules[@]}"; do
+    while IFS= read -r src; do
+      [ -n "$src" ] || continue
+      dst="$HOME/.$(basename "${src%.*}")"
+      link_file "$src" "$dst"
+    done < <(find -H "$DOTFILES_ROOT/$module" -maxdepth 1 -name '*.symlink' -not -path '*.git*')
   done
 }
 
-setup_gitconfig
+mapfile -t modules < <(dotfiles_resolve_modules "$@")
+dotfiles_write_enabled "${modules[@]}"
+
+if dotfiles_contains_module git "${modules[@]}"; then
+  setup_gitconfig
+fi
+
 install_dotfiles
 
 # # If we're on a Mac, let's install and setup homebrew.

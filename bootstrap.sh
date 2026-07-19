@@ -1,20 +1,41 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-sudo xcode-select --install
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install --cask gpg-suite-no-mail
-softwareupdate --install-rosetta --agree-to-license
-mkdir -p ~/src/github.com/f10et
-cd ~/src/github.com/f10et 
+set -euo pipefail
 
-git clone https://github.com/f10et/dotfiles.git
-cd ~
-ln -s ~/src/github.com/f10et/dotfiles ~/.dotfiles
+DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/f10et/dotfiles.git}"
+DOTFILES_PROFILE="${DOTFILES_PROFILE:-default}"
+DOTFILES_PARENT="${DOTFILES_PARENT:-$HOME/src/github.com/f10et}"
+DOTFILES_DIR="${DOTFILES_DIR:-$DOTFILES_PARENT/dotfiles}"
 
-cd  ~/src/github.com/f10et/dotfiles
+if [ "$(uname -s)" = "Darwin" ]; then
+  xcode-select --install 2>/dev/null || true
 
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/f10et/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+  if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 
-script/bootstrap
-script/install
+  if command -v brew >/dev/null 2>&1; then
+    brew install --cask gpg-suite-no-mail || true
+  fi
+
+  softwareupdate --install-rosetta --agree-to-license 2>/dev/null || true
+fi
+
+mkdir -p "$DOTFILES_PARENT"
+
+if [ -d "$DOTFILES_DIR/.git" ]; then
+  git -C "$DOTFILES_DIR" pull --ff-only
+else
+  git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+fi
+
+ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+
+cd "$DOTFILES_DIR"
+
+if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+  eval "$(brew shellenv)"
+fi
+
+script/bootstrap profile "$DOTFILES_PROFILE"
+script/install profile "$DOTFILES_PROFILE"

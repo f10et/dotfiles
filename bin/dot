@@ -1,55 +1,147 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # dot
 #
-# `dot` handles installation, updates, things like that. Run it periodically
-# to make sure you're on the latest and greatest.
+# `dot` handles module selection, installation, updates, and editing.
 
-set -e
+set -euo pipefail
 
 parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
 dotfilesDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
 
+source "$dotfilesDirectory/script/lib/modules.sh"
+
 displayUsageAndExit() {
+	local status="${1:-0}"
+
 	echo "dot -- dotfiles management"
 	echo ""
-	echo "Usage: dot [options]"
+	echo "Usage: dot <command> [arguments]"
 	echo ""
-	echo "Options:"
-	echo "  -e, --edit    Open dotfiles directory for editing"
-	echo "  -h, --help    Show this help message and exit"
-	exit
+	echo "Commands:"
+	echo "  list                         List available modules"
+	echo "  enabled                      Show enabled modules"
+	echo "  enable <module...>           Add modules to the enabled set"
+	echo "  disable <module...>          Remove modules from the enabled set"
+	echo "  profile <name>               Replace enabled modules with a profile"
+	echo "  bootstrap [module...]        Link dotfiles for enabled or requested modules"
+	echo "  install [module...]          Run installers for enabled or requested modules"
+	echo "  apply [module...]            Save, bootstrap, and install modules"
+	echo "  apply profile <name>         Save, bootstrap, and install a profile"
+	echo "  update                       Apply macOS defaults, update brew, then install"
+	echo "  edit                         Open dotfiles directory for editing"
+	echo "  help                         Show this help message and exit"
+	exit "$status"
 }
 
-while test $# -gt 0; do
-	case "$1" in
-		"-h"|"--help")
-			displayUsageAndExit
-			;;
-		"-e"|"--edit")
-			exec "$EDITOR" "$dotfilesDirectory"
-			exit
-			;;
-		*)
-			echo "Invalid option: $1"
-			displayUsageAndExit
-			;;
-	esac
-	shift
-done
+save_modules() {
+	mapfile -t modules < <(dotfiles_resolve_modules "$@")
+	dotfiles_write_enabled "${modules[@]}"
+}
 
-export ZSH=$HOME/.dotfiles
+add_modules() {
+	local module
+	local current=()
+	local requested=()
 
-# Set macOS defaults
-$ZSH/macos/set-defaults.sh
+	mapfile -t current < <(dotfiles_enabled_modules)
+	mapfile -t requested < <(dotfiles_resolve_modules "$@")
+	mapfile -t modules < <(printf '%s\n' "${current[@]}" "${requested[@]}" | dotfiles_unique_modules)
+	dotfiles_write_enabled "${modules[@]}"
+}
 
-# Install homebrew
-$ZSH/homebrew/install.sh 2>&1
+remove_modules() {
+	local module remove
+	local current=()
+	local requested=()
+	local next=()
 
-# Upgrade homebrew
-echo "› brew update"
-brew update
+	mapfile -t current < <(dotfiles_enabled_modules)
+	mapfile -t requested < <(dotfiles_resolve_modules "$@")
 
-# Install software
-echo "› $ZSH/script/install"
-$ZSH/script/install
+	for module in "${current[@]}"; do
+		remove=false
+		for candidate in "${requested[@]}"; do
+			if [ "$module" = "$candidate" ]; then
+				remove=true
+				break
+			fi
+		done
+
+		[ "$remove" = false ] && next+=("$module")
+	done
+
+	dotfiles_write_enabled "${next[@]}"
+}
+
+run_update() {
+	export ZSH="${ZSH:-$HOME/.dotfiles}"
+	local enabled=()
+	mapfile -t enabled < <(dotfiles_enabled_modules)
+
+	if dotfiles_contains_module macos "${enabled[@]}"; then
+		"$ZSH/macos/set-defaults.sh"
+	fi
+
+	if command -v brew >/dev/null 2>&1; then
+		echo "› brew update"
+		brew update
+	fi
+
+	echo "› $ZSH/script/install"
+	"$ZSH/script/install"
+}
+
+command="${1:-help}"
+[ "$#" -gt 0 ] && shift || true
+
+case "$command" in
+	-h|--help|help)
+		displayUsageAndExit
+		;;
+	-e|--edit|edit)
+		exec "${EDITOR:-nano}" "$dotfilesDirectory"
+		;;
+	list)
+		dotfiles_available_modules
+		;;
+	enabled)
+		dotfiles_enabled_modules
+		;;
+	enable)
+		[ "$#" -gt 0 ] || displayUsageAndExit 1
+		add_modules "$@"
+		dotfiles_enabled_modules
+		;;
+	disable)
+		[ "$#" -gt 0 ] || displayUsageAndExit 1
+		remove_modules "$@"
+		dotfiles_enabled_modules
+		;;
+	profile)
+		[ "$#" -gt 0 ] || displayUsageAndExit 1
+		save_modules profile "$1"
+		dotfiles_enabled_modules
+		;;
+	bootstrap)
+		"$dotfilesDirectory/script/bootstrap" "$@"
+		;;
+	install)
+		"$dotfilesDirectory/script/install" "$@"
+		;;
+	apply)
+		if [ "$#" -gt 0 ]; then
+			save_modules "$@"
+		fi
+
+		"$dotfilesDirectory/script/bootstrap"
+		"$dotfilesDirectory/script/install"
+		;;
+	update)
+		run_update
+		;;
+	*)
+		echo "Invalid command: $command"
+		displayUsageAndExit 1
+		;;
+esac
