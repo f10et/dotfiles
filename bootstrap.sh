@@ -22,6 +22,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 else
   # Linux
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 fi
 
 mkdir -p "$DOTFILES_PARENT"
