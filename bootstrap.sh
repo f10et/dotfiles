@@ -41,5 +41,5 @@ if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
   eval "$(brew shellenv)"
 fi
 
-script/bootstrap profile "$DOTFILES_PROFILE"
-script/install profile "$DOTFILES_PROFILE"
+PATH="/home/linuxbrew/.linuxbrew/bin/:$PATH" script/bootstrap profile "$DOTFILES_PROFILE"
+PATH="/home/linuxbrew/.linuxbrew/bin/:$PATH" script/install profile "$DOTFILES_PROFILE"

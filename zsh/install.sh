@@ -1,1 +1,1 @@
-brew starship
+brew install starship
