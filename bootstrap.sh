@@ -19,6 +19,9 @@ if [ "$(uname -s)" = "Darwin" ]; then
   fi
 
   softwareupdate --install-rosetta --agree-to-license 2>/dev/null || true
+else
+  # Linux
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 mkdir -p "$DOTFILES_PARENT"
