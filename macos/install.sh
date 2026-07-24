@@ -11,7 +11,7 @@ fi
 echo "› sudo softwareupdate -i -a"
 #sudo softwareupdate -i -a
 
-brew install tldr htop hub kubectx kube-ps1 krew starship
+brew install tldr htop hub kubectx kube-ps1 krew
 
 brew install --cask 1password \
   arc \

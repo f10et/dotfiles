@@ -9,6 +9,15 @@ else
   export HOMEBREW_PATH="/opt/homebrew/opt"
 fi
 
+
+if [ "$(uname -s)" = "Darwin" ]; then
+ 
+else
+  # Linux
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+fi
+
+
 dotfiles_enabled_file="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/enabled"
 
 typeset -U dotfiles_modules
